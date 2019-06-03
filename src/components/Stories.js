@@ -1,7 +1,8 @@
 import React from 'react';
 
 const nytapi = 'uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0';
-const section = 'arts';
+const section = 'books';
+const sections = ['arts', 'travel'];
 
 class Stories extends React.Component {
   constructor() {
@@ -12,30 +13,32 @@ class Stories extends React.Component {
   }
 
   componentWillMount() {
-    fetch(
-      `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=${nytapi}`,
-    )
-      .then(response => response.json())
-      .then(data => {
-        let stories = data.results.map(story => {
+    Promise.all([
+      fetch(
+        `https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
+      ).then(response => response.json()),
+
+      fetch(
+        `https://api.nytimes.com/svc/topstories/v2/books.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
+      ).then(response => response.json()),
+
+      fetch(
+        `https://api.nytimes.com/svc/topstories/v2/travel.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
+      ).then(response => response.json()),
+    ]).then(data => {
+      console.log(data); // (3) [{…}, {…}, {…}]
+      data.forEach(section => {
+        console.log(section);
+        let stories = section.results.map(story => {
           return (
-            <div className="entry" key={story.title}>
-              <img src={story.multimedia[0].url} alt="images" />
-              <div>
-                <h3>
-                  <a href={story.short_url}>
-                    {story.title}
-                  </a>
-                </h3>
-                <p>
-                  {story.abstract}
-                </p>
-              </div>
+            <div className="entry">
+              {story.title}
             </div>
           );
         });
         this.setState({ stories: stories });
       });
+    });
   }
 
   render() {
