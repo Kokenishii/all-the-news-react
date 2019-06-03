@@ -1,7 +1,7 @@
 import React from 'react';
 
-// const nytapi = 'uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0';
-// const section = 'arts';
+const nytapi = 'uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0';
+const section = 'arts';
 
 class Stories extends React.Component {
   constructor() {
@@ -13,7 +13,7 @@ class Stories extends React.Component {
 
   componentWillMount() {
     fetch(
-      'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0',
+      `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=${nytapi}`,
     )
       .then(response => response.json())
       .then(data => {
@@ -42,22 +42,14 @@ class Stories extends React.Component {
     return (
       <div className="site-wrap">
         {this.state.stories}
-        <pre>
+        {/* <pre>
           <code>
             {JSON.stringify(this.state.stories, null, 2)}
           </code>
-        </pre>
+        </pre> */}
       </div>
     );
   }
 }
 
 export default Stories;
-
-// function fetchArticles(section) {
-//   fetch(
-//     `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=${nytapi}`,
-//   )
-//     .then(response => response.json())
-//     .then(myJson => renderStories(myJson));
-// }
