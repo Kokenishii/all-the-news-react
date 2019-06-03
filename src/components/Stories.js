@@ -8,7 +8,6 @@ class Stories extends React.Component {
     super();
     this.state = {
       stories: [],
-      test: [1, 2, 3, 4],
     };
   }
 
@@ -17,19 +16,36 @@ class Stories extends React.Component {
       'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0',
     )
       .then(response => response.json())
-      .then(stories => this.setState({ stories }));
+      .then(data => {
+        let stories = data.results.map(story => {
+          return (
+            <div className="entry" key={story.title}>
+              <img src={story.multimedia[0].url} alt="images" />
+              <div>
+                <h3>
+                  <a href={story.short_url}>
+                    {story.title}
+                  </a>
+                </h3>
+                <p>
+                  {story.abstract}
+                </p>
+              </div>
+            </div>
+          );
+        });
+        this.setState({ stories: stories });
+      });
   }
 
   render() {
-    const results = this.state.stories.results;
-    // console.log(typeof results);
     return (
       <div className="site-wrap">
-        {Object.keys(results).map(story => `<li>${story}</li>`)}
-        {/* {this.state.test.map(num => num + 1)} */}
-        {console.log(typeof this.state.stories)}
+        {this.state.stories}
         <pre>
-          <code>{JSON.stringify(this.state.stories, null, 2)}</code>
+          <code>
+            {JSON.stringify(this.state.stories, null, 2)}
+          </code>
         </pre>
       </div>
     );
