@@ -3,15 +3,8 @@ import React from 'react';
 const nytapi = 'uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0';
 const section = 'arts';
 
-class Stories extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      stories: [],
-    };
-  }
-
-  componentWillMount() {
+const Stories = function() {
+  const getStories = function() {
     fetch(
       `https://api.nytimes.com/svc/topstories/v2/${section}.json?api-key=${nytapi}`,
     )
@@ -34,22 +27,14 @@ class Stories extends React.Component {
             </div>
           );
         });
-        this.setState({ stories: stories });
       });
-  }
+  };
 
-  render() {
-    return (
-      <div className="site-wrap">
-        {this.state.stories}
-        {/* <pre>
-          <code>
-            {JSON.stringify(this.state.stories, null, 2)}
-          </code>
-        </pre> */}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="site-wrap">
+      {getStories()}
+    </div>
+  );
+};
 
 export default Stories;
