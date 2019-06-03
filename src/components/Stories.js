@@ -31,8 +31,25 @@ class Stories extends React.Component {
         console.log(section);
         let stories = section.results.map(story => {
           return (
-            <div className="entry">
-              {story.title}
+            <div className="entry" key={story.title}>
+              <img
+                src={
+                  story.multimedia[0] === undefined
+                    ? ''
+                    : story.multimedia[0].url
+                }
+                alt="images"
+              />
+              <div>
+                <h3>
+                  <a href={story.short_url}>
+                    {story.title}
+                  </a>
+                </h3>
+                <p>
+                  {story.abstract}
+                </p>
+              </div>
             </div>
           );
         });
