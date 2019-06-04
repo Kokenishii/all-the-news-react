@@ -12,7 +12,7 @@ class Nav extends React.Component {
               key={navItem.link}
               link={navItem.link}
               label={navItem.label}
-              buildStories={this.props.buildStories}
+              getStories={this.props.getStories}
             />,
           )}
         </ul>
