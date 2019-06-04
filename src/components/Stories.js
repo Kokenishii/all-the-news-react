@@ -42,17 +42,14 @@ class Stories extends React.Component {
               />
               <div>
                 <h3>
-                  <a href={story.short_url}>
-                    {story.title}
-                  </a>
+                  <a href={story.short_url}>{story.title}</a>
                 </h3>
-                <p>
-                  {story.abstract}
-                </p>
+                <p>{story.abstract}</p>
               </div>
             </div>
           );
         });
+        // const newstories = {this.state.stories}
         this.setState({ stories: stories });
       });
     });
