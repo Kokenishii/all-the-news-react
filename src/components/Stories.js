@@ -26,9 +26,9 @@ class Stories extends React.Component {
         `https://api.nytimes.com/svc/topstories/v2/travel.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
       ).then(response => response.json()),
     ]).then(data => {
-      console.log(data); // (3) [{…}, {…}, {…}]
+      // console.log(data); // (3) [{…}, {…}, {…}]
       data.forEach(section => {
-        console.log(section);
+        // console.log(section);
         let stories = section.results.map(story => {
           return (
             <div className="entry" key={story.title}>
@@ -42,9 +42,13 @@ class Stories extends React.Component {
               />
               <div>
                 <h3>
-                  <a href={story.short_url}>{story.title}</a>
+                  <a href={story.short_url}>
+                    {story.title}
+                  </a>
                 </h3>
-                <p>{story.abstract}</p>
+                <p>
+                  {story.abstract}
+                </p>
               </div>
             </div>
           );

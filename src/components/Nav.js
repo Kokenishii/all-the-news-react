@@ -1,19 +1,24 @@
 import React from 'react';
 
-const Nav = props => {
-  return (
-    <nav>
-      <ul>
-        {props.navList.map(navItem => (
-          <li key={navItem.link}>
-            <a onClick="this.props.test" href={navItem.link}>
-              {navItem.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
+import NavItem from './NavItem';
+
+class Nav extends React.Component {
+  render() {
+    return (
+      <nav>
+        <ul>
+          {this.props.navList.map(navItem =>
+            <NavItem
+              key={navItem.link}
+              link={navItem.link}
+              label={navItem.label}
+              buildStories={this.props.buildStories}
+            />,
+          )}
+        </ul>
+      </nav>
+    );
+  }
+}
 
 export default Nav;
