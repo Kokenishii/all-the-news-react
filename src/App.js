@@ -33,18 +33,18 @@ const navItemsObject = [
 class App extends React.Component {
   constructor() {
     super();
-    this.buildStories = this.buildStories.bind(this);
+    this.getStories = this.getStories.bind(this);
     this.state = {
       navItems: navItemsObject,
-      stories: [],
+      stories: null,
     };
   }
 
-  componentWillMount() {
-    this.buildStories('arts');
+  componentDidMount() {
+    this.getStories('arts');
   }
 
-  buildStories(link) {
+  getStories(link) {
     fetch(
       `https://api.nytimes.com/svc/topstories/v2/${link}.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
     )
@@ -56,8 +56,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Nav navList={navItemsObject} buildStories={this.buildStories} />
-        <Stories />
+        <Nav navList={navItemsObject} />
+        {this.state.stories
+          ? <Stories stories={this.state.stories} />
+          : 'Loading...'}
       </div>
     );
   }
