@@ -2,7 +2,9 @@ import React from 'react';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Stories from './components/Stories';
-// https://css-tricks.com/using-data-in-react-with-the-fetch-api-and-axios/
+
+// import './NavItems.js';
+
 const navItemsObject = [
   {
     label: 'arts',
@@ -61,12 +63,14 @@ class App extends React.Component {
       <div className="App">
         <Header />
         <Nav navList={navItemsObject} getStories={this.getStories} />
-        {error ? <p>{error.message}</p> : null}
-        {!isLoading ? (
-          <Stories stories={this.state.stories} />
-        ) : (
-          <h3>Loading...</h3>
-        )}
+        {error
+          ? <p>
+              {error.message}
+            </p>
+          : null}
+        {!isLoading
+          ? <Stories stories={this.state.stories} />
+          : <h3>Loading...</h3>}
       </div>
     );
   }

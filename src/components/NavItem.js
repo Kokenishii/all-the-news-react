@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class NavItem extends Component {
   sendSection = () => {
-    // console.log(this.props.link);
     this.props.getStories(this.props.label);
   };
 
