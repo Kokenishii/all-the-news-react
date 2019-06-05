@@ -9,7 +9,7 @@ class Stories extends React.Component {
   render() {
     // if (this.props.stories.stories === undefined) return;
     const results = this.props.stories.results;
-    console.log('results ', this.props.stories.results);
+    // console.log('results ', this.props.stories.results);
     return (
       <div className="site-wrap">
         {results.map((story, index) => (

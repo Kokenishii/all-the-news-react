@@ -56,7 +56,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoading, stories, error } = this.state;
+    const { isLoading, error } = this.state;
     return (
       <div className="App">
         <Header />
