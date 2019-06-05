@@ -7,13 +7,13 @@ class Stories extends React.Component {
   // }
 
   render() {
-    // if (!this.props.stories) return;
+    // if (this.props.stories.stories === undefined) return;
     const results = this.props.stories.results;
     console.log('results ', this.props.stories.results);
     return (
       <div className="site-wrap">
-        {results.map(story =>
-          <div className="entry" key={story.title}>
+        {results.map((story, index) => (
+          <div className="entry" key={index}>
             <img
               src={
                 story.multimedia[0] === undefined ? '' : story.multimedia[0].url
@@ -27,12 +27,10 @@ class Stories extends React.Component {
                   {story.title}
                 </a>
               </h3>
-              <p>
-                {story.abstract}
-              </p>
+              <p>{story.abstract}</p>
             </div>
-          </div>,
-        )}
+          </div>
+        ))}
       </div>
     );
   }
