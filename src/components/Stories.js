@@ -20,16 +20,19 @@ class Stories extends React.Component {
         let stories = data.results.map(story => {
           return (
             <div className="entry" key={story.title}>
-              <img src={story.multimedia[0].url} alt="images" />
+              <img
+                src={
+                  story.multimedia[0] === undefined
+                    ? ''
+                    : story.multimedia[0].url
+                }
+                alt="images"
+              />
               <div>
                 <h3>
-                  <a href={story.short_url}>
-                    {story.title}
-                  </a>
+                  <a href={story.short_url}>{story.title}</a>
                 </h3>
-                <p>
-                  {story.abstract}
-                </p>
+                <p>{story.abstract}</p>
               </div>
             </div>
           );
