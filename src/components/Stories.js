@@ -6,7 +6,7 @@ class Stories extends React.Component {
     console.log('results ', this.props.stories.results);
     return (
       <div className="site-wrap">
-        {results.map(story =>
+        {results.map(story => (
           <div className="entry">
             <img
               src={
@@ -21,12 +21,10 @@ class Stories extends React.Component {
                   {story.title}
                 </a>
               </h3>
-              <p>
-                {story.abstract}
-              </p>
+              <p>{story.abstract}</p>
             </div>
-          </div>,
-        )}
+          </div>
+        ))}
       </div>
     );
   }
