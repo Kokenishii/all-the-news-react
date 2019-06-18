@@ -66,18 +66,13 @@ class App extends React.Component {
   }
 
   getStories(link) {
+    this.setState({ isLoading: true });
     fetch(
       `https://api.nytimes.com/svc/topstories/v2/${link}.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
     )
       .then(response => response.json())
       .then(data => this.setState({ stories: data, isLoading: false }))
       .catch(error => this.setState({ error, isLoading: false }));
-  }
-
-  fixNav() {
-    window.addEventListener('scroll', function() {
-      console.log(window.scrollY);
-    });
   }
 
   render() {
