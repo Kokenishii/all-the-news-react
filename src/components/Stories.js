@@ -18,7 +18,12 @@ class Stories extends React.Component {
 
             <div>
               <h3>
-                <a target="_blank" href={story.short_url} alt={story.title}>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={story.short_url}
+                  alt={story.title}
+                >
                   {story.title}
                 </a>
               </h3>

@@ -7,14 +7,19 @@ class Nav extends React.Component {
     return (
       <nav>
         <ul>
-          {this.props.navList.map(navItem =>
+          <li className="logo">
+            <a href="#top">
+              <img src="img/logo.svg" alt="logo" />
+            </a>
+          </li>
+          {this.props.navList.map(navItem => (
             <NavItem
               key={navItem.link}
               link={navItem.link}
               label={navItem.label}
               getStories={this.props.getStories}
-            />,
-          )}
+            />
+          ))}
         </ul>
       </nav>
     );
