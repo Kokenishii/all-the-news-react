@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 class NavItem extends Component {
-  sendSection = () => {
+  sendSection = event => {
     this.props.getStories(this.props.label);
+    window.location.href = '#top';
   };
 
   render() {
