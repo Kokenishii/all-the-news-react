@@ -67,11 +67,11 @@ class App extends React.Component {
     )
       .then(response => response.json())
       .then(data => this.setState({ stories: data, isLoading: false }))
-      .catch(error => this.setState({ error, isLoading: false }));
+      .catch(error => console.log(error));
   };
 
   render() {
-    const { isLoading, error } = this.state;
+    const { isLoading } = this.state;
     return (
       <div className="App">
         <Header />
