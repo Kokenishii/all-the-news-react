@@ -33,44 +33,37 @@ const navItemsObject = [
 ];
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.getStories = this.getStories.bind(this);
-    this.state = {
-      navItems: navItemsObject,
-      stories: null,
-      isLoading: true,
-      error: null,
-    };
-  }
+  state = {
+    navItems: navItemsObject,
+    stories: null,
+    isLoading: true,
+  };
 
   componentDidMount(section = 'arts') {
     this.getStories(section);
   }
 
-  getStories(link) {
+  getStories = link => {
     fetch(
       `https://api.nytimes.com/svc/topstories/v2/${link}.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
     )
       .then(response => response.json())
       .then(data => this.setState({ stories: data, isLoading: false }))
-      .catch(error => this.setState({ error, isLoading: false }));
-  }
+      .catch(error => console.log(error));
+  };
 
   render() {
-    const { isLoading, error } = this.state;
+    const { isLoading } = this.state;
     return (
       <div className="App">
         <Header />
         <Nav navList={navItemsObject} getStories={this.getStories} />
-        {error
-          ? <p>
-              {error.message}
-            </p>
-          : null}
-        {!isLoading
-          ? <Stories stories={this.state.stories} />
-          : <h3>Loading...</h3>}
+
+        {!isLoading ? (
+          <Stories stories={this.state.stories} />
+        ) : (
+          <h3>Loading...</h3>
+        )}
       </div>
     );
   }
