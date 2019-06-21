@@ -4,12 +4,9 @@ const nytapi = 'uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0';
 const section = 'arts';
 
 class Stories extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      stories: [],
-    };
-  }
+  state = {
+    stories: [],
+  };
 
   componentWillMount() {
     fetch(
@@ -22,9 +19,9 @@ class Stories extends React.Component {
             <div className="entry" key={story.title}>
               <img
                 src={
-                  story.multimedia[0] === undefined
-                    ? ''
-                    : story.multimedia[0].url
+                  story.multimedia.length > 0
+                    ? story.multimedia[0].url
+                    : '/img/no-image.png'
                 }
                 alt="images"
               />
