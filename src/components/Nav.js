@@ -3,6 +3,10 @@ import React from 'react';
 import NavItem from './NavItem';
 
 class Nav extends React.Component {
+  state = {
+    isActive: false,
+  };
+
   render() {
     return (
       <nav>

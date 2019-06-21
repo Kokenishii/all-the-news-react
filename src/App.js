@@ -33,17 +33,11 @@ const navItemsObject = [
 ];
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.getStories = this.getStories.bind(this);
-    this.handleScroll = this.handleScroll.bind(this);
-    this.state = {
-      navItems: navItemsObject,
-      stories: null,
-      isLoading: true,
-      error: null,
-    };
-  }
+  state = {
+    navItems: navItemsObject,
+    stories: null,
+    isLoading: true,
+  };
 
   componentDidMount(section = 'arts') {
     this.getStories(section);
@@ -54,7 +48,7 @@ class App extends React.Component {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
-  handleScroll() {
+  handleScroll = () => {
     if (window.scrollY > document.querySelector('header').offsetHeight) {
       document.body.style.paddingTop =
         document.querySelector('nav').offsetHeight + 'px';
@@ -63,9 +57,10 @@ class App extends React.Component {
       document.body.style.paddingTop = 0;
       document.body.classList.remove('fixed-nav');
     }
-  }
+  };
 
-  getStories(link) {
+  getStories = link => {
+    console.log(link);
     this.setState({ isLoading: true });
     fetch(
       `https://api.nytimes.com/svc/topstories/v2/${link}.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
@@ -73,7 +68,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then(data => this.setState({ stories: data, isLoading: false }))
       .catch(error => this.setState({ error, isLoading: false }));
-  }
+  };
 
   render() {
     const { isLoading, error } = this.state;
@@ -81,7 +76,6 @@ class App extends React.Component {
       <div className="App">
         <Header />
         <Nav navList={navItemsObject} getStories={this.getStories} />
-        {error ? <p>{error.message}</p> : null}
         {!isLoading ? (
           <Stories stories={this.state.stories} />
         ) : (

@@ -87,6 +87,10 @@ nav a {
   font-weight: 700;
 }
 
+nav a.active {
+  color: red;
+}
+
 img {
   width: 100%;
 }
