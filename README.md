@@ -361,5 +361,100 @@ export default Nav;
 
 ```
 
-## Categories
+## 5: Categories
 
+```js
+import React, { Component } from 'react';
+
+class NavItem extends Component {
+  sendSection = () => {
+    this.props.getStories(this.props.label);
+  };
+
+  render() {
+    return (
+      <li>
+        <a href={this.props.link} onClick={this.sendSection}>
+          {this.props.label}
+        </a>
+      </li>
+    );
+  }
+}
+export default NavItem;
+```
+
+```js
+import React from 'react';
+import Header from './components/Header';
+import Nav from './components/Nav';
+import Stories from './components/Stories';
+
+// import './NavItems.js';
+
+const navItemsObject = [
+  {
+    label: 'arts',
+    link: '#arts',
+  },
+  {
+    label: 'books',
+    link: '#books',
+  },
+  {
+    label: 'fashion',
+    link: '#fashion',
+  },
+  {
+    label: 'food',
+    link: '#food',
+  },
+  {
+    label: 'movies',
+    link: '#movies',
+  },
+  {
+    label: 'travel',
+    link: '#travel',
+  },
+];
+
+class App extends React.Component {
+  state = {
+    navItems: navItemsObject,
+    stories: null,
+    isLoading: true,
+  };
+
+  componentDidMount(section = 'arts') {
+    this.getStories(section);
+  }
+
+  getStories = link => {
+    fetch(
+      `https://api.nytimes.com/svc/topstories/v2/${link}.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
+    )
+      .then(response => response.json())
+      .then(data => this.setState({ stories: data, isLoading: false }))
+      .catch(error => console.log(error));
+  };
+
+  render() {
+    const { isLoading } = this.state;
+    return (
+      <div className="App">
+        <Header />
+        <Nav navList={navItemsObject} getStories={this.getStories} />
+
+        {!isLoading ? (
+          <Stories stories={this.state.stories} />
+        ) : (
+          <h3>Loading...</h3>
+        )}
+      </div>
+    );
+  }
+}
+
+export default App;
+```
