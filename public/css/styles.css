@@ -85,10 +85,12 @@ nav a {
   color: white;
   text-transform: capitalize;
   font-weight: 700;
+  min-height: 2.5rem;
+  line-height: 2.5rem;
 }
 
-nav a.active {
-  color: red;
+nav li.active {
+  background-color: #00aeef;
 }
 
 img {

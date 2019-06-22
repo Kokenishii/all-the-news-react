@@ -37,6 +37,7 @@ class App extends React.Component {
     navItems: navItemsObject,
     stories: null,
     isLoading: true,
+    activeLink: navItemsObject[0].label,
   };
 
   componentDidMount(section = 'arts') {
@@ -60,7 +61,7 @@ class App extends React.Component {
   };
 
   getStories = link => {
-    console.log(link);
+    this.setState({ activeLink: link });
     this.setState({ isLoading: true });
     fetch(
       `https://api.nytimes.com/svc/topstories/v2/${link}.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
@@ -75,7 +76,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Nav navList={navItemsObject} getStories={this.getStories} />
+        <Nav
+          navList={navItemsObject}
+          getStories={this.getStories}
+          activeLink={this.state.activeLink}
+        />
         {!isLoading ? (
           <Stories stories={this.state.stories} />
         ) : (

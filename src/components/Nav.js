@@ -3,10 +3,6 @@ import React from 'react';
 import NavItem from './NavItem';
 
 class Nav extends React.Component {
-  state = {
-    isActive: false,
-  };
-
   render() {
     return (
       <nav>
@@ -22,6 +18,7 @@ class Nav extends React.Component {
               link={navItem.link}
               label={navItem.label}
               getStories={this.props.getStories}
+              activeLink={this.props.activeLink}
             />
           ))}
         </ul>
