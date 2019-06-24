@@ -1,6 +1,8 @@
+import React from 'react';
+
 const MyContext = React.createContext();
 
-class MyProvider extends Component {
+class MyProvider extends React.Component {
   state = {
     name: 'Wes',
     age: 100,
@@ -22,3 +24,5 @@ class MyProvider extends Component {
     );
   }
 }
+
+export default MyProvider;

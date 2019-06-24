@@ -1,8 +1,45 @@
 import React from 'react';
-import Header from './components/Header';
+// import Header from './components/Header';
 import Nav from './components/Nav';
 import Stories from './components/Stories';
 import navItems from './components/navItems';
+// import MyProvider from './MyProvider';
+
+const MyContext = React.createContext();
+
+class MyProvider extends React.Component {
+  state = {
+    name: 'Wes',
+    age: 100,
+    cool: true,
+    siteTitle: 'All the News that Fits We Print',
+  };
+  render() {
+    return (
+      <MyContext.Provider
+        value={{
+          state: this.state,
+          growAYearOlder: () =>
+            this.setState({
+              age: this.state.age + 1,
+            }),
+        }}
+      >
+        {this.props.children}
+      </MyContext.Provider>
+    );
+  }
+}
+
+const Header = props => {
+  return (
+    <header>
+      <MyContext.Consumer>
+        {context => <h1>{context.state.siteTitle}</h1>}
+      </MyContext.Consumer>
+    </header>
+  );
+};
 
 class App extends React.Component {
   state = {
@@ -41,19 +78,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
-        <Header siteTitle="All the News that Fits We Print" />
-        <Nav
-          navItems={navItems}
-          getStories={this.getStories}
-          activeLink={this.state.activeLink}
-        />
-        {this.state.isLoading ? (
-          'Loading...'
-        ) : (
-          <Stories stories={this.state.stories} />
-        )}
-      </>
+      <MyProvider>
+        <>
+          <Header siteTitle="All the News that Fits We Print" />
+          <Nav
+            navItems={navItems}
+            getStories={this.getStories}
+            activeLink={this.state.activeLink}
+          />
+          {this.state.isLoading ? (
+            'Loading...'
+          ) : (
+            <Stories stories={this.state.stories} />
+          )}
+        </>
+      </MyProvider>
     );
   }
 }

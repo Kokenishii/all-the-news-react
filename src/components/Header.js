@@ -1,9 +1,13 @@
 import React from 'react';
 
+import MyContext from '../MyContext';
+
 const Header = props => {
   return (
     <header>
-      <h1>{props.siteTitle}</h1>
+      <MyContext.Consumer>
+        {context => <h1>{context.state.siteTitle}</h1>}
+      </MyContext.Consumer>
     </header>
   );
 };
