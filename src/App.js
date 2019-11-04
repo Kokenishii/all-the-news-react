@@ -61,8 +61,8 @@ class App extends React.Component {
   };
 
   getStories = link => {
-    this.setState({ activeLink: link });
-    this.setState({ isLoading: true });
+    this.setState({ activeLink: link, isLoading: true });
+    // this.setState({ isLoading: true });
     fetch(
       `https://api.nytimes.com/svc/topstories/v2/${link}.json?api-key=uQG4jhIEHKHKm0qMKGcTHqUgAolr1GM0`,
     )
@@ -84,7 +84,7 @@ class App extends React.Component {
         {!isLoading ? (
           <Stories stories={this.state.stories} />
         ) : (
-          <h3>Loading...</h3>
+          <h3 style={{ margin: '0 auto' }}>Loading...</h3>
         )}
       </div>
     );

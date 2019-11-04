@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 
 class NavItem extends Component {
   sendSection = event => {
+    event.preventDefault();
     this.props.getStories(this.props.label);
-    window.location.href = '#top';
-
-    // this.setState({ isActive: !this.state.isActive });
   };
-  // className={this.state.isActive ? 'active' : ''}
+
   render() {
     return (
       <li
