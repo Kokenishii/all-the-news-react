@@ -64,6 +64,8 @@ nav {
   width: 100%;
   transition: all 0.5s;
   z-index: 1;
+  position: sticky;
+  top:0;
 }
 
 nav ul {
@@ -102,7 +104,7 @@ li.logo img {
   width: 2.5rem;
 }
 li.logo {
-  max-width: 0;
+  max-width: 36;
   overflow: hidden;
   background: white;
   transition: all 0.5s;
@@ -130,4 +132,20 @@ li.logo {
   padding-top: 4rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid #007eb6;
+}
+.loading {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading h3 {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  background: url('../img/spinner.svg') 50% 50% no-repeat;
 }
